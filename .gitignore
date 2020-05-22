@@ -1,0 +1,35 @@
+*.rbc
+capybara-*.html
+/log
+/tmp
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/public/system
+/coverage/
+/spec/tmp
+**.orig
+rerun.txt
+pickle-email-*.html
+target
+*.swp
+
+## Environment normalisation:
+/.bundle
+/vendor/bundle
+
+
+# OSX
+.DS_Store
+
+
+# Ignore IDE files
+.idea
+master.key
+credentials.yml.enc/public/packs
+/public/packs-test
+/public/packs
+/public/packs-test
+.vscode
+
+# Ignore bundled assets
+/public
