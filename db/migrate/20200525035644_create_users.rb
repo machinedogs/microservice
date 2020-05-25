@@ -3,9 +3,9 @@ class CreateUsers < ActiveRecord::Migration[6.0]
     create_table :users do |t|
       t.string :name
       t.string :password
-      t.string :createdEvents, array: true, default: []
-      t.string :savedEvents, array: true, default: []
-
+      t.string :createdEvents, array: true
+      t.string :savedEvents, array: true
+      
       t.timestamps
     end
   end
