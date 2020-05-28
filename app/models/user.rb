@@ -2,5 +2,5 @@
 
 class User < ApplicationRecord
   has_many :events, foreign_key: 'user_id'
-  serialize :createdEvents, :savedEvents
+  # serialize :createdEvents, :savedEvents
 end

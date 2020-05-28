@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2020_05_25_040555) do
   enable_extension "plpgsql"
 
   create_table "events", force: :cascade do |t|
-    t.string "host_name"
+    t.bigint "user_id"
     t.string "title"
     t.text "description"
     t.date "date"
@@ -25,11 +25,13 @@ ActiveRecord::Schema.define(version: 2020_05_25_040555) do
     t.decimal "longitude", precision: 15, scale: 10
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_events_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
-    t.string "encrypted_password", null: false
+    t.string "email", null: false
+    t.string "password", null: false
     t.string "created_events", array: true
     t.string "saved_events", array: true
     t.datetime "created_at", precision: 6, null: false
