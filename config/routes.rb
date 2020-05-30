@@ -3,8 +3,9 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :users, only: [:index, :create]
-      resources :events, only: [:index, :create]
+      resources :users, only: %i[index create]
+      resources :events, only: %i[index create]
+      resources :authentications, only: %i[create]
     end
   end
 end

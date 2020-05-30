@@ -1,7 +1,7 @@
 # frozen_string_literal: true
+
 require 'byebug'
 class Api::V1::EventsController < ApplicationController
-
   # Create events
   def create
     event = Event.create(event_params)
@@ -11,14 +11,13 @@ class Api::V1::EventsController < ApplicationController
     else
       render json: { status: 'ERROR', message: 'Event Not Saved', data: event.errors }, status: :unprocessable_entity
     end
-
   end
 
-  #Gets created events
-  def index 
+  # Gets created events
+  def index
     events = Event.all
-    render json: {status:'SUCCESS', message: 'Loaded Events', data: events}, status: :ok
-  end 
+    render json: { status: 'SUCCESS', message: 'Loaded Events', data: events }, status: :ok
+  end
 
   private
 

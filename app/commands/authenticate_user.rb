@@ -1,6 +1,7 @@
 # frozen_string_literal: true
-
+require 'byebug'
 class AuthenticateUser
+  include JsonWebToken
   prepend SimpleCommand
 
   def initialize(email, password)
@@ -8,19 +9,20 @@ class AuthenticateUser
     @password = password
   end
 
+  #Returns a jwt token if the user method  is successful 
   def call
-    JsonWebToken.encode(user_id: user.id) if user
+    JsonWebToken::encode(user_id: user.id) if user
   end
 
-    private
+  private
 
   attr_accessor :email, :password
 
   def user
     user = User.find_by_email(email)
-    return user if user&.authenticate(password)
+    return user if user&.password == password
 
     errors.add :user_authentication, 'invalid credentials'
     nil
   end
-  end
+end
