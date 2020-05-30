@@ -28,6 +28,8 @@ gem 'rack-cors'
 # JWT gem
 gem 'jwt'
 
+gem 'devise'
+
 # Used to reduce code
 gem 'simple_command'
 
