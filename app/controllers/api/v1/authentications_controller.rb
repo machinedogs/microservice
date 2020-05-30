@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Api::V1::AuthenticationsController < ApplicationController
-  # skip_before_action :authenticate_request
+  skip_before_action :authenticate_request
 
 
 
@@ -16,6 +16,8 @@ class Api::V1::AuthenticationsController < ApplicationController
       render json: { error: command.errors }, status: :unauthorized
     end
   end
+
+
 
 
   # private

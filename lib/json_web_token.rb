@@ -3,7 +3,6 @@ module JsonWebToken
 
   def self.encode(payload, exp = 24.hours.from_now)
     payload[:exp] = exp.to_i
-    byebug
     JWT.encode(payload, secret_key)
   end
 

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # app/commands/authorize_api_request.rb
-
+require 'byebug'
 class AuthorizeApiRequest
   prepend SimpleCommand
 
@@ -13,7 +13,8 @@ class AuthorizeApiRequest
     user
   end
 
-    private
+
+  private
 
   attr_reader :headers
 
@@ -27,8 +28,8 @@ class AuthorizeApiRequest
   end
 
   def http_auth_header
-    if headers['Authorization'].present?
-      return headers['Authorization'].split(' ').last
+    if headers['auth'].present?
+      return headers['auth'].split(' ').last
     else
       errors.add :token, 'Missing token'
     end

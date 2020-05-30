@@ -2,6 +2,7 @@
 
 require 'byebug'
 class Api::V1::EventsController < ApplicationController
+  skip_before_action :authenticate_request, :except =>[:create]
   # Create events
   def create
     event = Event.create(event_params)
