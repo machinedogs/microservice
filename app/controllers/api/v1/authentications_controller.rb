@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
 class Api::V1::AuthenticationsController < ApplicationController
-  
-
-
-
-  #This method will take in user email and password(hashed password eventually), authenticate the  user, and return  the  jwt token on successful  login
+  # This method will take in user email and password(hashed password eventually), authenticate the  user, and return  the  jwt token on successful  login
   # Give Client authentication token
   def create
     command = AuthenticateUser.call(params[:email], params[:password])
@@ -16,9 +12,6 @@ class Api::V1::AuthenticationsController < ApplicationController
       render json: { error: command.errors }, status: :unauthorized
     end
   end
-
-
-
 
   # private
 

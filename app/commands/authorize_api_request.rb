@@ -13,7 +13,6 @@ class AuthorizeApiRequest
     user
   end
 
-
   private
 
   attr_reader :headers
@@ -28,8 +27,8 @@ class AuthorizeApiRequest
   end
 
   def http_auth_header
-    if headers['auth'].present?
-      return headers['auth'].split(' ').last
+    if headers['auth_token'].present?
+      return headers['auth_token'].split(' ').last
     else
       errors.add :token, 'Missing token'
     end

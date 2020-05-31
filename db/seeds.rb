@@ -24,5 +24,5 @@ event_object = {
   "latitude": '39.9800',
   "longitude": '-75.1600'
 }
-#Associates the user to this event
+# Associates the user to this event
 user.event.create(event_object)

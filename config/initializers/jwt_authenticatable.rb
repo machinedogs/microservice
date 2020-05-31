@@ -5,39 +5,30 @@ module Devise
       class JWTAuthenticatable < Base
         #Here check if there is token present 
         def authenticate!
-          byebug
-          token = get_token
-          return fail(:invalid) unless token.present?
-          
-          payload = get_payload
-          return fail(:invalid) if payload == :expired
-          
-          resource = mapping.to.find(payload['user_id'])
-          return fail(:not_found_in_database) unless resource
-          
-          success! resource
+          # byebug
+          if user
+            success!(user)
+          else
+            fail!('Invalid email or password')
         end
         
-        private
-        
-        def get_payload
-          JWT.decode(
-            get_token,
-            Rails.application.secrets.secret_key_base,
-            true,
-            { algorithm: 'HS256' }
-          ).first
-        rescue JWT::ExpiredSignature
-          :expired
+        def user
+          @user ||= Host.find(decoded_auth_token[:user_id]) if decoded_auth_token
+          @user || errors.add(:token, 'Invalid token') && nil
         end
-        
-        def get_token
-          auth_header.present? && auth_header.split(' ').last
+    
+        def decoded_auth_token
+          @decoded_auth_token ||= JsonWebToken.decode(http_auth_header)
         end
-        
-        def auth_header
-          request.headers['Authorization']
+    
+        def http_auth_header
+          if params['auth_token'].present?
+            return params['auth_token'].split(' ').last
+          else
+            errors.add :token, 'Missing token'
+          end
         end
       end
     end
 end
+
