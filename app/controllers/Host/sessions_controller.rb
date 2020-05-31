@@ -1,12 +1,12 @@
 # frozen_string_literal: true
+
 require 'byebug'
+
 class Host::SessionsController < Devise::SessionsController
-  skip_before_action :authenticate_host!
-  # before_action :configure_sign_in_params, only: [:create]
+  skip_before_action :authenticate_host! # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
   def new
-    byebug
     command = AuthenticateUser.call(params[:email], params[:password])
 
     if command.success?

@@ -23,6 +23,22 @@ event_object = {
   "type_id": '1',
   "latitude": '39.9800',
   "longitude": '-75.1600'
-}
-# Associates the user to this event
+} # Associates the user to this event
 user.event.create(event_object)
+
+#Create a host 
+host_object = {
+  "email": "fakeemail@gmail.com",
+  "password": "fakepassword",
+  "password_confirmation": "fakepassword"
+}
+host_object2 = {
+  "email": "fakeemail2@gmail.com",
+  "password": "fakepassword",
+  "password_confirmation": "fakepassword"
+}
+
+host = Host.create(host_object)
+host.save
+host = Host.create(host_object2)
+host.save

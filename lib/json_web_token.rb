@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'byebug'
+
 module JsonWebToken
   def self.encode(payload, exp = 24.hours.from_now)
     payload[:exp] = exp.to_i
@@ -15,6 +16,7 @@ module JsonWebToken
   end
 
   def self.secret_key
-    Rails.application.secrets&.secret_key_base || Rails.application.credentials&.secret_key_base
+    Rails.application.secrets&.secret_key_base ||
+      Rails.application.credentials&.secret_key_base
   end
 end

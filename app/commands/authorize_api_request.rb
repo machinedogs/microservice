@@ -2,6 +2,7 @@
 
 # app/commands/authorize_api_request.rb
 require 'byebug'
+
 class AuthorizeApiRequest
   prepend SimpleCommand
 

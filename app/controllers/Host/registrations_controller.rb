@@ -1,16 +1,22 @@
 # frozen_string_literal: true
+
 require 'byebug'
+
 class Host::RegistrationsController < Devise::RegistrationsController
-  before_action :configure_sign_up_params, only: [:create]
-  before_action :configure_account_update_params, only: [:update]
+  before_action :configure_sign_up_params, only: %i[create]
+  before_action :configure_account_update_params, only: %i[update]
 
   # GET /resource/sign_up
   def new
     host = Host.create(host_params)
     if host.save
-      render json: {status:'SUCCESS', message: 'Saved Host', data: host}, status: :ok
+      render json: { status: 'SUCCESS', message: 'Saved Host', data: host },
+             status: :ok
     else
-      render json: {status:'ERROR', message: 'Host Not Saved', data: host.errors}, status: :unprocessable_entity
+      render json: {
+        status: 'ERROR', message: 'Host Not Saved', data: host.errors
+      },
+             status: :unprocessable_entity
     end
   end
 
@@ -47,12 +53,12 @@ class Host::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[attribute])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[attribute])
   end
 
   # The path used after sign up.
@@ -68,5 +74,4 @@ class Host::RegistrationsController < Devise::RegistrationsController
   def host_params
     params.permit(:email, :password, :password_confirmation)
   end
-
 end

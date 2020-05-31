@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'byebug'
+
 class AuthenticateUser
   include JsonWebToken
   prepend SimpleCommand
@@ -12,7 +13,6 @@ class AuthenticateUser
 
   # Returns a jwt token if the user method  is successful
   def call
-    byebug
     JsonWebToken.encode(user_id: user.id) if user
   end
 

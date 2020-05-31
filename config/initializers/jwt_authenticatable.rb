@@ -4,16 +4,10 @@ require 'byebug'
 
 module Devise
   module Strategies
-    class JWTAuthenticatable < Base
-      # Here check if there is token present
+    class JWTAuthenticatable < Base # Here check if there is token present
       def authenticate!
-          byebug
-        if user
-          success!(user)
-        else
-          fail!('Invalid email or password')
-        end
 
+        user ? success!(user) : fail!('Invalid email or password')
       end
 
       def user

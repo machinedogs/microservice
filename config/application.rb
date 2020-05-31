@@ -2,8 +2,7 @@
 
 require_relative 'boot'
 
-require 'rails'
-# Pick the frameworks you want:
+require 'rails' # Pick the frameworks you want:
 require 'active_model/railtie'
 require 'active_job/railtie'
 require 'active_record/railtie'
@@ -13,8 +12,7 @@ require 'action_mailer/railtie'
 require 'action_mailbox/engine'
 require 'action_text/engine'
 require 'action_view/railtie'
-require 'action_cable/engine'
-# require "sprockets/railtie"
+require 'action_cable/engine' # require "sprockets/railtie"
 require 'rails/test_unit/railtie'
 
 # Require the gems listed in Gemfile, including any gems
@@ -22,8 +20,7 @@ require 'rails/test_unit/railtie'
 Bundler.require(*Rails.groups)
 
 module GigApi
-  class Application < Rails::Application
-    # Settings in config/environments/* take precedence over those specified here.
+  class Application < Rails::Application # Settings in config/environments/* take precedence over those specified here.
     config.eager_load_paths << Rails.root.join('lib')
     config.time_zone = 'Eastern Time (US & Canada)'
     config.active_record.default_timezone = :local
