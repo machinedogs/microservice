@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'byebug'
 class ApplicationController < ActionController::API
-    before_action :authenticate_request
+  before_action :authenticate_host!
 
     attr_reader :current_user
     # helper_method :current_user
