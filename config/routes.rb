@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :hosts
+  devise_for :hosts,  :controllers => {:sessions => "host/sessions", :registrations => "host/registrations"} 
 
   namespace :api do
     namespace :v1 do
@@ -10,4 +10,5 @@ Rails.application.routes.draw do
       resources :authentications, only: %i[create]
     end
   end
+
 end
