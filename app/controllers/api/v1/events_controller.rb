@@ -24,7 +24,14 @@ class Api::V1::EventsController < ApplicationController
   # Gets created events
   def index
     @events = Event.all
-    render :events, status: :ok
+    render :events, status: :success
+  end
+
+  #This endpoint is protected, and needs to authenticate user
+  def host_events
+    @user = AuthorizeApiRequest.call(params).result
+    @host_events = Event.where(host_id: @user.id)
+    render :host_events, status: :ok
   end
 
   private
