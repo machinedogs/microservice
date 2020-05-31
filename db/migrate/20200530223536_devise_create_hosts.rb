@@ -3,6 +3,11 @@
 class DeviseCreateHosts < ActiveRecord::Migration[6.0]
   def change
     create_table :hosts do |t|
+
+    # Custom host attributes 
+
+      t.string :name, null: false, default: ''
+
       ## Database authenticatable
       t.string :email,
                null: false, default: ''

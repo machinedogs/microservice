@@ -10,4 +10,5 @@ class ApplicationController < ActionController::API
   def authenticate_api
     
   end
+
 end

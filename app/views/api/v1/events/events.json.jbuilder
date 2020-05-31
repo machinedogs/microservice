@@ -9,9 +9,7 @@ json.array! @events do |event|
       json.latitude event.latitude
     end
     json.host do
-      json.host do 
-        json.name event.user.name
-        json.email event.user.email
-      end
+      json.name event.host.name
+      json.email event.host.email
     end
 end

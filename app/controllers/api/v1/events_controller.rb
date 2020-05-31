@@ -2,12 +2,17 @@
 
 require 'byebug'
 
-class Api::V1::EventsController < ApplicationController # Create events
+class Api::V1::EventsController < ApplicationController
+  skip_before_action :authenticate_host!, only: [:index]
+  include JsonWebToken
+  #Create an event, need to be authenticated, and associate this event to this host 
+  #Decode the jwt to get the host, and create the event for that host 
   def create
-    event = Event.create(event_params)
-    if event.save
-      render json: { status: 'SUCCESS', message: 'Saved Event', data: event },
-             status: :ok
+    #Get user
+    @user = AuthorizeApiRequest.call(params).result
+    @event = @user.event.create(event_params)
+    if @event.save
+      render :event, status: :ok
     else
       render json: {
         status: 'ERROR', message: 'Event Not Saved', data: event.errors
@@ -26,7 +31,6 @@ class Api::V1::EventsController < ApplicationController # Create events
 
   def event_params
     params.permit(
-      :host_name,
       :title,
       :description,
       :date,
