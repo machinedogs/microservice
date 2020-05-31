@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'byebug'
 
 class Api::V1::UsersController < ApplicationController # Create User
   def create

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'byebug'
 
 class Host::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: %i[create]

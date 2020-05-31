@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'byebug'
+
 
 module JsonWebToken
   def self.encode(payload, exp = 24.hours.from_now)

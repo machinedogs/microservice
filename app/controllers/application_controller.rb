@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'byebug'
+
 class ApplicationController < ActionController::API
   before_action :authenticate_host!
   

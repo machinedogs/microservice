@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'byebug'
 
 module Devise
   module Strategies
