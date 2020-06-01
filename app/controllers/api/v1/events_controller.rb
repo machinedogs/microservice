@@ -23,7 +23,7 @@ class Api::V1::EventsController < ApplicationController
   # Gets created events
   def index
     @events = Event.all
-    render :events, status: :success
+    render :events, status: :ok
   end
 
   #This endpoint is protected, and needs to authenticate user
