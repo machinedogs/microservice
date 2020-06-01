@@ -8,9 +8,8 @@ class Host::SessionsController < Devise::SessionsController
   def new
 
     puts "Params Here "
-    puts params 
+
     command = AuthenticateUser.call(params[:email], params[:password])
-    puts command
 
     if command.success?
       render json: { auth_token: command.result }

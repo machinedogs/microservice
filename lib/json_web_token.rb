@@ -4,6 +4,9 @@
 
 module JsonWebToken
   def self.encode(payload, exp = 24.hours.from_now)
+    puts "Payload Here"
+    puts payload 
+    puts "Payload ^"
     payload[:exp] = exp.to_i
     JWT.encode(payload, secret_key)
   end
