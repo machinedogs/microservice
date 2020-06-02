@@ -1,4 +1,3 @@
-require 'byebug'
 
 json.data do
     json.host do 

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'byebug'
 class Host::SessionsController < Devise::SessionsController
   skip_before_action :authenticate_host! # before_action :configure_sign_in_params, only: [:create]
 
