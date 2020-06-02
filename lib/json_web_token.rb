@@ -8,18 +8,17 @@ module JsonWebToken
     puts payload 
     puts "Payload ^"
     payload[:exp] = exp.to_i
-    JWT.encode(payload, ENV['SECRET_KEY_BASE'])
+    JWT.encode(payload, secret_key)
   end
 
   def self.decode(token)
-    body = JWT.decode(token, ENV['SECRET_KEY_BASE'])[0]
+    body = JWT.decode(token, secret_key)[0]
     HashWithIndifferentAccess.new body
   rescue StandardError
     nil
   end
 
   def self.secret_key
-    Rails.application.secrets&.secret_key_base ||
-      Rails.application.credentials&.secret_key_base
+    APP_CONFIG['SECRET_KEY']
   end
 end

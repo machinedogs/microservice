@@ -7,15 +7,13 @@ class Host::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
-    host = Host.create(host_params)
-    if host.save
-      render json: { status: 'SUCCESS', message: 'Saved Host', data: host },
-             status: :ok
+    @host_sign_up = Host.create(host_params)
+    if @host_sign_up.save
+      render :host_sign_up, status: :ok
     else
       render json: {
-        status: 'ERROR', message: 'Host Not Saved', data: host.errors
-      },
-             status: :unprocessable_entity
+        status: 'ERROR', message: 'Host Not Saved', data: @host_sign_up.errors
+      },status: :unprocessable_entity
     end
   end
 
@@ -71,6 +69,6 @@ class Host::RegistrationsController < Devise::RegistrationsController
   end
 
   def host_params
-    params.permit(:email, :password, :password_confirmation)
+    params.permit(:email, :name,  :password, :password_confirmation)
   end
 end

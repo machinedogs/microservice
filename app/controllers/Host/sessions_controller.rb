@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-
+require 'byebug'
 class Host::SessionsController < Devise::SessionsController
   skip_before_action :authenticate_host! # before_action :configure_sign_in_params, only: [:create]
 
@@ -12,7 +12,8 @@ class Host::SessionsController < Devise::SessionsController
     command = AuthenticateUser.call(params[:email], params[:password])
 
     if command.success?
-      render json: { auth_token: command.result }
+      @host_sign_in = Host.where(email: params[:email]).first
+      render :host_sign_in, status: :ok
     else
       render json: { error: command.errors }, status: :unauthorized
     end
