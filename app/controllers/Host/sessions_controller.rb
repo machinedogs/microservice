@@ -5,8 +5,11 @@ class Host::SessionsController < Devise::SessionsController
 
   # GET /resource/sign_in
   def new
+    super
+  end
 
-    puts "Params Here "
+  # POST /resource/sign_in
+  def create
 
     command = AuthenticateUser.call(params[:email], params[:password])
 
@@ -17,11 +20,6 @@ class Host::SessionsController < Devise::SessionsController
       render json: { error: command.errors }, status: :unauthorized
     end
   end
-
-  # POST /resource/sign_in
-  # def create
-  #   super
-  # end
 
   # DELETE /resource/sign_out
   # def destroy

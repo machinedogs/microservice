@@ -7,6 +7,11 @@ class Host::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
+    super
+  end
+
+  # POST /resource
+  def create
     @host_sign_up = Host.create(host_params)
     if @host_sign_up.save
       render :host_sign_up, status: :ok
@@ -15,11 +20,6 @@ class Host::RegistrationsController < Devise::RegistrationsController
         status: 'ERROR', message: 'Host Not Saved', data: @host_sign_up.errors
       },status: :unprocessable_entity
     end
-  end
-
-  # POST /resource
-  def create
-    super
   end
 
   # GET /resource/edit
