@@ -1,16 +1,14 @@
 # frozen_string_literal: true
-require 'byebug'
-class ApplicationController < ActionController::API
-    before_action :authenticate_request
 
-    attr_reader :current_user
-    # helper_method :current_user
+
+class ApplicationController < ActionController::API
+  before_action :authenticate_host!
   
-    private
-  
-    def authenticate_request
-      @current_user = AuthorizeApiRequest.call(request.headers).result
-  
-      render json: { error: 'Not Authorized' }, status: 401 unless @current_user
-    end
+  private
+
+  #Use this method to verify that all api calls have a api key
+  def authenticate_api
+    
+  end
+
 end

@@ -1,25 +1,25 @@
 # frozen_string_literal: true
 
 # app/commands/authorize_api_request.rb
-require 'byebug'
+
+
 class AuthorizeApiRequest
   prepend SimpleCommand
 
-  def initialize(headers = {})
-    @headers = headers
+  def initialize(params = {})
+    @params = params
   end
 
   def call
     user
   end
 
-
   private
 
-  attr_reader :headers
+  attr_reader :params
 
   def user
-    @user ||= User.find(decoded_auth_token[:user_id]) if decoded_auth_token
+    @user ||= Host.find(decoded_auth_token[:host_id]) if decoded_auth_token
     @user || errors.add(:token, 'Invalid token') && nil
   end
 
@@ -28,12 +28,10 @@ class AuthorizeApiRequest
   end
 
   def http_auth_header
-    if headers['auth'].present?
-      return headers['auth'].split(' ').last
+    if params['auth_token'].present?
+      params['auth_token'].split(' ').last
     else
       errors.add :token, 'Missing token'
     end
-
-    nil
   end
 end
