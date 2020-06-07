@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :hosts,
-             controllers: {
-               sessions: 'host/sessions', registrations: 'host/registrations'
-             }
 
   namespace :api do
     namespace :v1, defaults: { format: :json } do

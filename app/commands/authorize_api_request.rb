@@ -20,11 +20,17 @@ class AuthorizeApiRequest
 
   def user
     @user ||= Host.find(decoded_auth_token[:host_id]) if decoded_auth_token
-    @user || errors.add(:token, 'Invalid token') && nil
+    #Check if token is expired or not and make sure it is auth token and not a refresh one
+    if Time.at(decoded_auth_token[:exp]) < Time.now && decoded_auth_token[:refresh]
+      errors.add(:token, 'Invalid token') && nil
+    else
+      @user
+    end
   end
 
   def decoded_auth_token
     @decoded_auth_token ||= JsonWebToken.decode(http_auth_header)
+
   end
 
   def http_auth_header
