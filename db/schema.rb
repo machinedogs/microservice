@@ -19,10 +19,11 @@ ActiveRecord::Schema.define(version: 2020_05_30_223536) do
     t.bigint "host_id"
     t.string "title"
     t.text "description"
-    t.date "date"
-    t.string "type_id"
-    t.decimal "latitude", precision: 15, scale: 10
-    t.decimal "longitude", precision: 15, scale: 10
+    t.string "date"
+    t.string "category"
+    t.string "latitude"
+    t.string "longitude"
+    t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["host_id"], name: "index_events_on_host_id"
@@ -30,6 +31,8 @@ ActiveRecord::Schema.define(version: 2020_05_30_223536) do
 
   create_table "hosts", force: :cascade do |t|
     t.string "name", default: "", null: false
+    t.string "profileImage", default: "", null: false
+    t.string "saved_events", array: true
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -39,16 +42,6 @@ ActiveRecord::Schema.define(version: 2020_05_30_223536) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_hosts_on_email", unique: true
     t.index ["reset_password_token"], name: "index_hosts_on_reset_password_token", unique: true
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "email", null: false
-    t.string "password", null: false
-    t.string "created_events", array: true
-    t.string "saved_events", array: true
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
 end
