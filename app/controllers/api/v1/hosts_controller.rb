@@ -1,4 +1,4 @@
-require 'byebug'
+
 class Api::V1::HostsController < ApplicationController
     #Get profile image, need to be changed 
     def index 
