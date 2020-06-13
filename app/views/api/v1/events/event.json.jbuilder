@@ -1,4 +1,5 @@
 json.event do 
+    json.event @event.id
     json.title @event.title
     json.description @event.description
     json.date @event.date

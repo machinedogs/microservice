@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 json.array! @host_events do |event|
+    json.event event.id
     json.title event.title
     json.description event.description
     json.date event.date
