@@ -40,7 +40,8 @@ class Api::V1::EventsController < ApplicationController
       :title,
       :description,
       :date,
-      :type_id,
+      :image,
+      :category,
       :latitude,
       :longitude
     )
