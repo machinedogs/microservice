@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require 'byebug'
 json.array! @events do |event|
     json.event event.id
     json.title event.title
