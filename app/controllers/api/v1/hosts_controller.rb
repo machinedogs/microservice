@@ -20,7 +20,7 @@ class Api::V1::HostsController < ApplicationController
         
         #Get user
         host = AuthorizeApiRequest.call(params).result
-        image = ""+params[:profileImage]+params[:token]
+        image = ""+params[:profileImage]+'&token'+params[:token]
         #Update their profile image 
         if(host.update(profileImage: image))
             render json: {status: 'success'}, status: :ok
