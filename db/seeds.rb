@@ -36,24 +36,25 @@ host2.save
 
 # Creates Event for host 1
 event_object = {
-  "title": 'Partyy',
-  "description": 'Come party yall',
-  "date": '',
-  "type_id": '1',
-  "latitude": '39.9800',
-  "longitude": '-75.1600'
+  "title": "Partyy",
+  "description": "Come party yall",
+  "date": "6-14-2020",
+  "category": "category",
+  "image": "https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+  "latitude": "39.9800",
+  "longitude": "-75.1600"
 } 
 
 #Creates event for host 2
 event_object2 = {
-  "title": 'Partyy 2',
-  "description": 'Come party yall',
-  "date": '',
-  "type_id": '1',
-  "latitude": '39.9800',
-  "longitude": '-75.1600'
-}
-
+  "title": "Partyy at my house",
+  "description": "Come party yall",
+  "date": "6-14-2020",
+  "category": "category",
+  "image": "https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+  "latitude": "39.9800",
+  "longitude": "-75.1600"
+} 
 
 # Associates the host to this event
 host.event.create(event_object)
