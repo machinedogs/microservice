@@ -20,7 +20,7 @@ class Api::V1::HostsController < ApplicationController
         
         #Get user
         host = AuthorizeApiRequest.call(params).result
-        image = ""+params[:profileImage]+'&token='+params[:token]
+        image = ""+parse_string(params[:profileImage])+"&token="+params[:token]
         #Update their profile image 
         if(host.update(profileImage: image))
             render json: {status: 'success'}, status: :ok
@@ -30,5 +30,10 @@ class Api::V1::HostsController < ApplicationController
     
     end
 
+    private 
+    
+    def parse_string(string)
+        string.gsub('images/', 'images%2F')
+    end
 
 end
