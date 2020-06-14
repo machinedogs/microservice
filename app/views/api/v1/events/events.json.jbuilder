@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'byebug'
 json.array! @events do |event|
     json.event event.id
     json.title event.title
@@ -9,6 +10,7 @@ json.array! @events do |event|
     json.location do
       json.longitude event.longitude
       json.latitude event.latitude
+      json.address Geocoder.search(''+event.latitude+','+event.longitude).first.address
     end
     json.host do
       json.profile event.host.profileImage

@@ -57,6 +57,6 @@ event_object2 = {
 } 
 
 # Associates the host to this event
-host.event.create(event_object)
+host.event.create!(event_object)
 
-host2.event.create(event_object2)
+host2.event.create!(event_object2)
