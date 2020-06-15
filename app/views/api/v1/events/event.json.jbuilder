@@ -8,6 +8,7 @@ json.event do
     json.location do
       json.longitude @event.longitude
       json.latitude @event.latitude
+      json.address Geocoder.search(''+@event.latitude+','+@event.longitude).first.address
     end
     json.host do
       json.profile @event.host.profileImage
