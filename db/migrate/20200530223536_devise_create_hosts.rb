@@ -9,7 +9,7 @@ class DeviseCreateHosts < ActiveRecord::Migration[6.0]
     #Firebase uri image
       t.string :profileImage, null: false, default: ''
     #Array of saved events 
-      t.string :saved_events, array: true
+      t.string :saved_events, array: true, default: []
 
       ## Database authenticatable
       t.string :email,

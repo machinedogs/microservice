@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2020_05_30_223536) do
   create_table "hosts", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "profileImage", default: "", null: false
-    t.string "saved_events", array: true
+    t.string "saved_events", default: [], array: true
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
