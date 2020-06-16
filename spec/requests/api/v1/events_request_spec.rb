@@ -1,5 +1,4 @@
 require "rails_helper"
-require "byebug"
 RSpec.describe "Api::V1::Events", type: :request do
   describe "GET no events" do
     before do

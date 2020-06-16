@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'byebug'
 class Api::V1::EventsController < ApplicationController
   skip_before_action :authenticate_host!, only: [:index]
   include JsonWebToken
@@ -52,7 +51,6 @@ class Api::V1::EventsController < ApplicationController
   def host_save_event
     #Get user
     user = AuthorizeApiRequest.call(params).result
-    byebug
     #update host
     #Update their profile image 
     if(user.update(saved_events: user.saved_events.push(params[:event])))
