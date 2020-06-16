@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 json.array! @events do |event|
+  next if event==nil
     json.event event.id
     json.title event.title
     json.description event.description
