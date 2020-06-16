@@ -10,7 +10,7 @@ json.array! @events do |event|
     json.location do
       json.longitude event.longitude
       json.latitude event.latitude
-      json.address Geocoder.search(''+ event.latitude.to_s +','+event.longitude.to_s)&.first&.address
+      json.address Geocoder.search(event.latitude.to_s + ','+ event.longitude.to_s )&.first&.address
     end
     json.host do
       json.profile event.host.profileImage
