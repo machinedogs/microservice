@@ -1,4 +1,4 @@
-class Api::V1::Hosts::EventsController < ApplicationController
+class Api::V1::Host::EventsController < ApplicationController
     include JsonWebToken
 
   # Create an event for a host

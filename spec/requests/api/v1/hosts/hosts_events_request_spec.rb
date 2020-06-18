@@ -16,7 +16,7 @@ RSpec.describe 'Api::V1::Hosts::Events', type: :request do
       host_result = double('host_result', result: host)
       allow(AuthorizeApiRequest).to receive(:call).and_return(host_result)
 
-      get '/api/v1/hosts/events'
+      get '/api/v1/host/events'
     end
     it 'returns http success' do
       expect(response).to have_http_status(:ok)
@@ -52,7 +52,7 @@ RSpec.describe 'Api::V1::Hosts::Events', type: :request do
 
       allow(AuthorizeApiRequest).to receive(:call).and_return(host_result)
 
-      get '/api/v1/hosts/events'
+      get '/api/v1/host/events'
     end
     it 'returns http success' do
       expect(response).to have_http_status(:ok)
@@ -75,7 +75,7 @@ RSpec.describe 'Api::V1::Hosts::Events', type: :request do
   describe 'Get events for a unauthorized host' do
     before do
       allow(controller).to receive(:authenticate_host!).and_return(false)
-      get '/api/v1/hosts/events'
+      get '/api/v1/host/events'
     end
     it 'returns http success' do
       expect(response).to have_http_status(:unauthorized)
@@ -115,8 +115,8 @@ RSpec.describe 'Api::V1::Hosts::Events', type: :request do
       host.event.create!(event_object)
       host_result = double('host_result', result: host)
       allow(AuthorizeApiRequest).to receive(:call).and_return(host_result)
-      post '/api/v1/hosts/events', params: event_object2
-      get '/api/v1/hosts/events'
+      post '/api/v1/host/events', params: event_object2
+      get '/api/v1/host/events'
     end
     it 'returns http success' do
       expect(response).to have_http_status(:ok)
@@ -169,7 +169,7 @@ RSpec.describe 'Api::V1::Hosts::Events', type: :request do
       }
       host_result = double('host_result', result: host)
       allow(AuthorizeApiRequest).to receive(:call).and_return(host_result)
-      post '/api/v1/hosts/events', params: event_object
+      post '/api/v1/host/events', params: event_object
     end
     it 'returns Active record error' do
       expect(response).to have_http_status(:unprocessable_entity)
@@ -179,7 +179,7 @@ RSpec.describe 'Api::V1::Hosts::Events', type: :request do
   describe "Creating an event but unauthorized since user doesn't exist" do
     before do
       allow(controller).to receive(:authenticate_host!).and_return(false)
-      post '/api/v1/hosts/events'
+      post '/api/v1/host/events'
     end
     it 'returns http unauthorized' do
       expect(response).to have_http_status(:unauthorized)
@@ -209,7 +209,7 @@ RSpec.describe 'Api::V1::Hosts::Events', type: :request do
       id = host.event.create!(event_object).id
       host_result = double('host_result', result: host)
       allow(AuthorizeApiRequest).to receive(:call).and_return(host_result)
-      url = '/api/v1/hosts/events/' + id.to_s
+      url = '/api/v1/host/events/' + id.to_s
       delete url
     end
     it 'returns http success' do
@@ -239,7 +239,7 @@ RSpec.describe 'Api::V1::Hosts::Events', type: :request do
       }
       host_result = double('host_result', result: host)
       allow(AuthorizeApiRequest).to receive(:call).and_return(host_result)
-      url = '/api/v1/hosts/events/4'
+      url = '/api/v1/host/events/4'
       delete url
     end
     it 'returns http not found' do
@@ -269,7 +269,7 @@ RSpec.describe 'Api::V1::Hosts::Events', type: :request do
       }
       host_result = double('host_result', result: host)
       allow(AuthorizeApiRequest).to receive(:call).and_return(host_result)
-      url = '/api/v1/hosts/events/1'
+      url = '/api/v1/host/events/1'
       delete url
     end
     it 'returns http not found' do
@@ -300,7 +300,7 @@ RSpec.describe 'Api::V1::Hosts::Events', type: :request do
       id = host.event.create!(event_object).id
       host_result = double('host_result', result: host)
       allow(AuthorizeApiRequest).to receive(:call).and_return(host_result)
-      url = '/api/v1/hosts/events/' + id.to_s
+      url = '/api/v1/host/events/' + id.to_s
       delete url
     end
     it 'returns http success' do
@@ -344,8 +344,8 @@ RSpec.describe 'Api::V1::Hosts::Events', type: :request do
       id = host.event.create!(event_object).id
       host_result = double('host_result', result: host2)
       allow(AuthorizeApiRequest).to receive(:call).and_return(host_result)
-      get '/api/v1/hosts/save_event', params: { 'event': id.to_s }
-      get '/api/v1/hosts/saved_events'
+      get '/api/v1/host/save_event', params: { 'event': id.to_s }
+      get '/api/v1/host/saved_events'
     end
     it 'returns http success' do
       expect(response).to have_http_status(:ok)
@@ -398,14 +398,14 @@ RSpec.describe 'Api::V1::Hosts::Events', type: :request do
       host_result = double('host_result', result: host2)
       allow(AuthorizeApiRequest).to receive(:call).and_return(host_result)
       # Save an event
-      get '/api/v1/hosts/save_event', params: { 'event': id.to_s }
+      get '/api/v1/host/save_event', params: { 'event': id.to_s }
       # Delete event
       host_result2 = double('host_result', result: host)
       allow(AuthorizeApiRequest).to receive(:call).and_return(host_result2)
-      url = '/api/v1/hosts/events/' + id.to_s
+      url = '/api/v1/host/events/' + id.to_s
       delete url
       # Get Saved events
-      get '/api/v1/hosts/saved_events'
+      get '/api/v1/host/saved_events'
     end
     it 'returns http success' do
       expect(response).to have_http_status(:ok)
@@ -441,7 +441,7 @@ RSpec.describe 'Api::V1::Hosts::Events', type: :request do
       host_result = double('host_result', result: host)
       allow(AuthorizeApiRequest).to receive(:call).and_return(host_result)
 
-      url = '/api/v1/hosts/events/' + id.to_s
+      url = '/api/v1/host/events/' + id.to_s
       put url
     end
     it 'returns http success' do
