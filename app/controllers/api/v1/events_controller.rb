@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 class Api::V1::EventsController < ApplicationController
-  # skip_before_action :authenticate_host!, only: [:index]
+  skip_before_action :authenticate_host!, only: [:index]
   include JsonWebToken
 
   # Gets created events, pass in date, and get all the events for that dat

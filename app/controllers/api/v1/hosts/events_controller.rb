@@ -1,7 +1,5 @@
-# frozen_string_literal: true
-
 class Api::V1::Hosts::EventsController < ApplicationController
-  include JsonWebToken
+    include JsonWebToken
 
   # Create an event for a host
   def create

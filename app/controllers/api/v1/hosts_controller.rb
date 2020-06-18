@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::Hosts::HostsController < ApplicationController
+class Api::V1::HostsController < ApplicationController
   include JsonWebToken
 
   # Get profile image, need to be changed
