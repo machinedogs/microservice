@@ -5,9 +5,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1, defaults: { format: :json } do
       resources :events, only: %i[index]
-      resources :hosts, only: %i[index create]
       namespace :host, defaults: { format: :json } do
         resources :events, only: %i[index create update destroy], controller: 'events'
+        resources :profiles, only: %i[index create]
         get '/saved_events' => 'events#host_saved_events'
         get '/save_event' => 'events#host_save_event'
       end

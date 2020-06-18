@@ -1,7 +1,5 @@
-# frozen_string_literal: true
-
-class Api::V1::HostsController < ApplicationController
-  include JsonWebToken
+class Api::V1::Host::ProfilesController < ApplicationController
+    include JsonWebToken
 
   # Get profile image, need to be changed
   def index

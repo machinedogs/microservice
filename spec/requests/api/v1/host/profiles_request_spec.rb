@@ -1,9 +1,7 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
-RSpec.describe 'Api::V1::Hosts', type: :request do
-  # Updates host profile
+RSpec.describe "Api::V1::Host::Profiles", type: :request do
+    # Updates host profile
   describe 'Update Host profile' do
     before do
       allow(controller).to receive(:authenticate_host!).and_return(true)
@@ -17,7 +15,7 @@ RSpec.describe 'Api::V1::Hosts', type: :request do
       host = Host.create(host_object)
       host_result = double('host_result', result: host)
       allow(AuthorizeApiRequest).to receive(:call).and_return(host_result)
-      post '/api/v1/hosts', params: { 'profileImage': '', 'token': '' }
+      post '/api/v1/host/profiles', params: { 'profileImage': '', 'token': '' }
     end
     it 'returns http success' do
       expect(response).to have_http_status(:ok)
@@ -37,7 +35,7 @@ RSpec.describe 'Api::V1::Hosts', type: :request do
       host = Host.create(host_object)
       host_result = double('host_result', result: host)
       allow(AuthorizeApiRequest).to receive(:call).and_return(host_result)
-      post '/api/v1/hosts', params: { 'profileImage': '' }
+      post '/api/v1/host/profiles', params: { 'profileImage': '' }
     end
     it 'returns http unprocessable entity' do
       expect(response).to have_http_status(:unprocessable_entity)
@@ -58,7 +56,7 @@ RSpec.describe 'Api::V1::Hosts', type: :request do
       host = Host.create(host_object)
       host_result = double('host_result', result: host)
       allow(AuthorizeApiRequest).to receive(:call).and_return(host_result)
-      get '/api/v1/hosts'
+      get '/api/v1/host/profiles'
     end
     it 'returns http success' do
       expect(response).to have_http_status(:ok)
