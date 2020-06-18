@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'byebug'
 RSpec.describe "Api::V1::Host::Events", type: :request do
     describe 'GET events for a authenticated host who has not hosted any events' do
         before do
