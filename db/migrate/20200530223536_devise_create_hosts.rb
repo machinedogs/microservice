@@ -3,12 +3,11 @@
 class DeviseCreateHosts < ActiveRecord::Migration[6.0]
   def change
     create_table :hosts do |t|
-
-    # Custom host attributes 
+      # Custom host attributes
       t.string :name, null: false, default: ''
-    #Firebase uri image
+      # Firebase uri image
       t.string :profileImage, null: false, default: ''
-    #Array of saved events 
+      # Array of saved events
       t.string :saved_events, array: true, default: []
 
       ## Database authenticatable
