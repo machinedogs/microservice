@@ -1,5 +1,5 @@
 require 'rails_helper'
-
+require 'byebug'
 RSpec.describe "Api::V1::Host::Events", type: :request do
     describe 'GET events for a authenticated host who has not hosted any events' do
         before do
@@ -436,19 +436,37 @@ RSpec.describe "Api::V1::Host::Events", type: :request do
             "latitude": '39.9800',
             "longitude": '-75.1600'
           }
+          event_object2 = {
+            "title": 'Updated Event Partyy',
+            "description": 'Updated',
+            "date": 'Updated',
+            "category": 'Updated',
+            "image": 'https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+            "latitude": 'Updated',
+            "longitude": 'Updated'
+          }
           id = host.event.create!(event_object).id
           host_result = double('host_result', result: host)
           allow(AuthorizeApiRequest).to receive(:call).and_return(host_result)
     
           url = '/api/v1/host/events/' + id.to_s
-          put url
+          put url, :params => event_object2
         end
         it 'returns http success' do
           expect(response).to have_http_status(:ok)
         end
-        # it 'returns http success' do
-        #   json_response = JSON.parse(response.body)
-        #   expect(json_response).to eq([])
-        # end
+        it 'returns correct json response' do
+          json_response = JSON.parse(response.body)["event"]
+          expect(json_response['title']).to eq('Updated Event Partyy')
+          expect(json_response['description']).to eq('Updated')
+          expect(json_response['date']).to eq('Updated')
+          expect(json_response['category']).to eq('Updated')
+          expect(json_response['image']).to eq('https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500')
+          expect(json_response['host']['profile']).to eq('https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500')
+          expect(json_response['host']['name']).to eq('John')
+          expect(json_response['host']['email']).to eq('fakemail@gmail.com')
+          expect(json_response['location']['latitude']).to eq('Updated')
+          expect(json_response['location']['longitude']).to eq('Updated')
+        end
       end
 end
