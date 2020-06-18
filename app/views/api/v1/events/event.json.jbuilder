@@ -1,4 +1,5 @@
 json.event do 
+  next if @event&.host == nil
     json.event @event.id
     json.title @event.title
     json.description @event.description

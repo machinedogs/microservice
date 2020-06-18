@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 class Api::V1::EventsController < ApplicationController
   skip_before_action :authenticate_host!, only: [:index]
   include JsonWebToken
@@ -45,6 +44,11 @@ class Api::V1::EventsController < ApplicationController
       @host_events.push(event)
     end
     render :host_events, status: :ok
+  #Error handling 
+  rescue ActiveRecord::RecordNotFound => e
+    render json: {
+      error: e.to_s
+    }, status: :not_found
   end
 
   #Save an event to a host, pass event id 
@@ -52,16 +56,17 @@ class Api::V1::EventsController < ApplicationController
     #Get user
     user = AuthorizeApiRequest.call(params).result
     #update host
-    #Update their profile image 
     if(user.update(saved_events: user.saved_events.push(params[:event])))
       render json: {status: 'success'}, status: :ok
     else
       render json: {status: 'error'}, status: :unprocessable_entity
     end
-
-
+  rescue ActiveRecord::RecordNotFound => e
+    render json: {
+      error: e.to_s
+    }, status: :not_found
   end
-  
+
 
   #Destroys an event, will authenticate if this event belongs to this host, then deletes it
   def destroy
@@ -71,11 +76,12 @@ class Api::V1::EventsController < ApplicationController
       render json: {
         status: 'Successful Deletion'
       }, status: :ok
-    else
-      render json: {
-        status: 'ERROR', message: 'Event could not be deleted ', data: event.errors
-      }, status: :forbidden
     end
+  #Error handling 
+  rescue ActiveRecord::RecordNotFound => e
+    render json: {
+      error: e.to_s
+    }, status: :not_found
   end
 
   private

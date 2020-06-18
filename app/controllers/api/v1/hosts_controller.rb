@@ -27,7 +27,8 @@ class Api::V1::HostsController < ApplicationController
         else
             render json: {status: 'error'}, status: :unprocessable_entity
         end
-    
+    rescue Exception => e # Never do this!
+        render json: {status: 'error'}, status: :unprocessable_entity
     end
 
     private 
