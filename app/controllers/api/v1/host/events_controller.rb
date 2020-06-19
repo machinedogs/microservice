@@ -55,9 +55,8 @@ class Api::V1::Host::EventsController < ApplicationController
     user = AuthorizeApiRequest.call(params).result
     # Get the list of all saved events
     saved_events = user.saved_events
-    if(saved_events == nil){
+    if(saved_events == nil)
       saved_events = []
-    }
     end
     @host_events = []
     # For all the saved events
