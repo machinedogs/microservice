@@ -53,7 +53,7 @@ class Api::V1::Host::EventsController < ApplicationController
   def host_saved_events
     user = AuthorizeApiRequest.call(params).result
     # Get the list of all saved events
-    saved_events = user.saved_events
+    saved_events = user&.saved_events
     @host_events = []
     # For all the saved events
     saved_events.each do |event_id|
@@ -66,22 +66,37 @@ class Api::V1::Host::EventsController < ApplicationController
     render json: {
       error: e.to_s
     }, status: :not_found
+  rescue Exception => e
+    render json: {
+      error: e.to_s
+    }, status: :unprocessable_entity
   end
 
   # Save an event to a host, pass event id
   def host_save_event
     # Get user
     user = AuthorizeApiRequest.call(params).result
-    # update host
-    if user.update(saved_events: user.saved_events.push(params[:event]))
-      render json: { status: 'success' }, status: :ok
+    #See if event exists and does not belong to this host
+    if(Event.find(params[:event]) && !user.event.exists?(params[:event]))
+      # save event
+      if user.update!(saved_events: user.saved_events.push(params[:event]))
+        render json: { status: 'success' }, status: :ok
+      else
+        render json: { status: 'error' }, status: :unprocessable_entity
+      end
     else
-      render json: { status: 'error' }, status: :unprocessable_entity
+      render json: {
+        error: e.to_s
+      }, status: :unprocessable_entity
     end
   rescue ActiveRecord::RecordNotFound => e
     render json: {
       error: e.to_s
     }, status: :not_found
+  rescue Exception => e
+    render json: {
+      error: e.to_s
+    }, status: :unprocessable_entity
   end
 
   private
