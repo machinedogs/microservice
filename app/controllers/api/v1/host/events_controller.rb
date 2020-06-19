@@ -99,10 +99,6 @@ class Api::V1::Host::EventsController < ApplicationController
     render json: {
       error: e.to_s
     }, status: :not_found
-  rescue Exception => e
-    render json: {
-      error: e.to_s
-    }, status: :unprocessable_entity
   end
 
   private
