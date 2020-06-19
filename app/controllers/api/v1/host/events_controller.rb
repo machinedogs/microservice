@@ -83,7 +83,9 @@ class Api::V1::Host::EventsController < ApplicationController
     #See if event exists and does not belong to this host
     if(Event.find(params[:event]) && !user.event.exists?(params[:event]))
       # save event
-      if user.update!(saved_events: user.saved_events.push(params[:event]))
+      if(user.saved_events == nil)
+        user.update!(saved_events: [(params[:event]])
+      elsif user.update!(saved_events: user.saved_events.push(params[:event]))
         render json: { status: 'success' }, status: :ok
       else
         render json: { status: 'error' }, status: :unprocessable_entity
