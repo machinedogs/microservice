@@ -50,10 +50,15 @@ class Api::V1::Host::EventsController < ApplicationController
 
   # This endpoint is protected, and needs to authenticate user
   # This endpoint allows you to get all saved events of the host
+  #Clean up
   def host_saved_events
     user = AuthorizeApiRequest.call(params).result
     # Get the list of all saved events
-    saved_events = user&.saved_events
+    saved_events = user.saved_events
+    if(saved_events == nil){
+      saved_events = []
+    }
+    end
     @host_events = []
     # For all the saved events
     saved_events.each do |event_id|
