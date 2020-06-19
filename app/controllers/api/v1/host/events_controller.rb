@@ -85,6 +85,7 @@ class Api::V1::Host::EventsController < ApplicationController
       # save event
       if user.saved_events == nil
         user.update!(saved_events: [ params[:event] ] )
+        render json: { status: 'success' }, status: :ok
       elsif user.update!(saved_events: user.saved_events.push(params[:event]))
         render json: { status: 'success' }, status: :ok
       else
