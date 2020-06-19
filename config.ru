@@ -9,4 +9,4 @@ run Rails.application
 # Call as early as possible so rack-timeout runs before all other middleware.
 # Setting service_timeout or `RACK_TIMEOUT_SERVICE_TIMEOUT` environment
 # variable is recommended. If omitted, defaults to 15 seconds.
-use Rack::Timeout, service_timeout: 15
+use Rack::Timeout, service_timeout: 30
