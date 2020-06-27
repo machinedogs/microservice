@@ -2,7 +2,6 @@
 
 # app/commands/authorize_api_request.rb
 
-
 class AuthorizeApiRequest
   prepend SimpleCommand
 
@@ -20,13 +19,12 @@ class AuthorizeApiRequest
 
   def user
     @user ||= Host.find(decoded_auth_token[:host_id]) if decoded_auth_token
-    rescue ActiveRecord::RecordNotFound
-      puts 'User does not exist'
+  rescue ActiveRecord::RecordNotFound
+    puts 'User does not exist'
   end
 
   def decoded_auth_token
     @decoded_auth_token ||= JsonWebToken.decode(http_auth_header)
-
   end
 
   def http_auth_header

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,38 +12,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_30_223536) do
-
+ActiveRecord::Schema.define(version: 20_200_530_223_536) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "events", force: :cascade do |t|
-    t.bigint "host_id"
-    t.string "title"
-    t.text "description"
-    t.string "date"
-    t.string "category"
-    t.string "latitude"
-    t.string "longitude"
-    t.string "image"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["host_id"], name: "index_events_on_host_id"
+  create_table 'events', force: :cascade do |t|
+    t.bigint 'host_id'
+    t.string 'title', default: '', null: false
+    t.text 'description', default: '', null: false
+    t.string 'date', default: '', null: false
+    t.string 'category', default: '', null: false
+    t.string 'latitude', default: '', null: false
+    t.string 'longitude', default: '', null: false
+    t.string 'image', default: '', null: false
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['host_id'], name: 'index_events_on_host_id'
   end
 
-  create_table "hosts", force: :cascade do |t|
-    t.string "name", default: "", null: false
-    t.string "profileImage", default: "", null: false
-    t.string "saved_events", array: true
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["email"], name: "index_hosts_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_hosts_on_reset_password_token", unique: true
+  create_table 'hosts', force: :cascade do |t|
+    t.string 'name', default: '', null: false
+    t.string 'profileImage', default: '', null: false
+    t.string 'saved_events', default: [], array: true
+    t.string 'email', default: '', null: false
+    t.string 'encrypted_password', default: '', null: false
+    t.string 'reset_password_token'
+    t.datetime 'reset_password_sent_at'
+    t.datetime 'remember_created_at'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['email'], name: 'index_hosts_on_email', unique: true
+    t.index ['reset_password_token'], name: 'index_hosts_on_reset_password_token', unique: true
   end
-
 end
