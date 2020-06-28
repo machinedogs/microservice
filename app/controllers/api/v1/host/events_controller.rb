@@ -81,7 +81,7 @@ class Api::V1::Host::EventsController < ApplicationController
     # Get user
     user = AuthorizeApiRequest.call(params).result
     #See if event exists and does not belong to this host
-    if Event.find(params[:event]) && !user.event.exists?(params[:event]) && user.saved_events.include? params[:event]
+    if (Event.find(params[:event]) && !user.event.exists?(params[:event]) && user.saved_events.include?(params[:event]))
       # save event
       if user.saved_events == nil
         user.update!(saved_events: [ params[:event] ] )
@@ -106,7 +106,7 @@ class Api::V1::Host::EventsController < ApplicationController
     # Get user
     user = AuthorizeApiRequest.call(params).result
     #See if event is saved event for that user, if so remove it 
-    if user.saved_events.include? params[:event]
+    if (user.saved_events.include?(params[:event]) )
       user.saved_events.delete(params[:event])
       render json: { status: 'success' }, status: :ok
     else
