@@ -107,7 +107,7 @@ class Api::V1::Host::EventsController < ApplicationController
     user = AuthorizeApiRequest.call(params).result
     #See if event is saved event for that user, if so remove it 
     if (user.saved_events.include?(params[:event]) )
-      user.update!(saved_events: user.saved_events.delete(params[:event]) )
+      user.update!(saved_events: user.saved_events-[params[:event]])
       render json: { status: 'success' }, status: :ok
     else
       render json: {
