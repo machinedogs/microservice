@@ -10,6 +10,7 @@ Rails.application.routes.draw do
         resources :profiles, only: %i[index create]
         get '/saved_events' => 'events#host_saved_events'
         get '/save_event' => 'events#host_save_event'
+        delete '/save_event' => 'events#delete_saved_event'
       end
     end
   end
