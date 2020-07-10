@@ -5,6 +5,7 @@ class Api::V1::EventsController < ApplicationController
 
   # Gets created events, pass in date, and get all the events for that dat
   def index
+    #check params 
     @events = Event.all
     render :events, status: :ok
   end

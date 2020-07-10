@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   devise_for :host
   namespace :api do
     namespace :v1, defaults: { format: :json } do
-      resources :events, only: %i[index]
+      resources :events, only: %i[index] do 
+        resources :attending, only: %i[index create destroy]
+      end
       namespace :host, defaults: { format: :json } do
         resources :events, only: %i[index create update destroy], controller: 'events'
         resources :profiles, only: %i[index create]
