@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2020_05_30_223536) do
     t.string "category", default: "", null: false
     t.string "latitude", default: "", null: false
     t.string "longitude", default: "", null: false
+    t.string "address", default: "", null: false
     t.string "image", default: "", null: false
     t.string "going", default: [], array: true
     t.datetime "created_at", precision: 6, null: false

@@ -12,7 +12,6 @@ class Api::V1::EventsController < ApplicationController
     @events = @events.select do |event|
       Geocoder::Calculations.distance_between([user_location[:latitude], user_location[:longitude]], [event.latitude, event.longitude])< 200
     end
-
     render :events, status: :ok
   end
 

@@ -1,3 +1,4 @@
+require 'byebug'
 class Api::V1::Host::EventsController < ApplicationController
     include JsonWebToken
 
@@ -5,6 +6,7 @@ class Api::V1::Host::EventsController < ApplicationController
   def create
     # Get user
     @user = AuthorizeApiRequest.call(params).result
+    byebug
     @event = @user.event.create!(event_params)
     render :event, status: :ok
   rescue ActiveRecord::ActiveRecordError => e
@@ -119,7 +121,7 @@ class Api::V1::Host::EventsController < ApplicationController
   private
 
   def event_params
-    params.permit(
+    param = params.permit(
       :title,
       :description,
       :date,
@@ -128,6 +130,8 @@ class Api::V1::Host::EventsController < ApplicationController
       :latitude,
       :longitude
     )
+    param[:address]= Geocoder.search(params[:latitude].to_s + ',' + params[:longitude].to_s)&.first&.address
+    return param
   end
 
   def parse_string(string)

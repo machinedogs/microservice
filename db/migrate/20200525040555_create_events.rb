@@ -10,6 +10,7 @@ class CreateEvents < ActiveRecord::Migration[6.0]
       t.string :category, null: false, default: ''
       t.string :latitude, null: false, default: ''
       t.string :longitude, null: false, default: ''
+      t.string :address, null: false, default: ''
       t.string :image, null: false, default: ''
       # Array of people going to the event
       t.string :going, array: true, default: []
