@@ -1,4 +1,4 @@
-require 'byebug'
+
 class Api::V1::Host::EventsController < ApplicationController
     include JsonWebToken
 
@@ -6,7 +6,6 @@ class Api::V1::Host::EventsController < ApplicationController
   def create
     # Get user
     @user = AuthorizeApiRequest.call(params).result
-    byebug
     @event = @user.event.create!(event_params)
     render :event, status: :ok
   rescue ActiveRecord::ActiveRecordError => e
