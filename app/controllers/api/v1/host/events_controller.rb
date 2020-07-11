@@ -117,6 +117,18 @@ class Api::V1::Host::EventsController < ApplicationController
     end
   end
 
+  def attending
+    #Get user
+    user = AuthorizeApiRequest.call(params).result
+    #Get all the events
+    @events = Event.all
+    #Filter based on the events that this user is attending
+    @events = @events.select do |event|
+      event.going.include?(user.id)
+    end
+    render :attending_events, status: :ok
+  end
+
   private
 
   def event_params
