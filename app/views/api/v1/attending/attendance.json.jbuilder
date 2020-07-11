@@ -1,6 +1,5 @@
 # frozen_string_literal: true
-json.attendance do
-    @event.going.each do |user| 
+json.array! @event.going do |user|
         host = Host.find(user)
         json.user do
             json.profile host.profileImage
