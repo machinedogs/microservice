@@ -124,7 +124,7 @@ class Api::V1::Host::EventsController < ApplicationController
     @events = Event.all
     #Filter based on the events that this user is attending
     @events = @events.select do |event|
-      event.going.include?(user.id)
+      event.going.include?(user.id.to_s)
     end
     render :attending_events, status: :ok
   end
