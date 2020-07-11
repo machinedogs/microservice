@@ -5,6 +5,5 @@ json.array! @event.going do |user|
             json.profile host.profileImage
             json.name host.name
             json.email host.email
-          end
-    end
+        end
 end
