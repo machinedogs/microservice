@@ -50,12 +50,7 @@ class Api::V1::AttendingController < ApplicationController
   def index
     #Get the event
     @event = Event.find(params[:event_id])
-    #Get the users going to the event
-    if(params[:display_user]=="true")
-      render :attendance, status: :ok
-    else
-      render json: { status: 'success', number_going: @event.going.length }, status: :ok
-    end
+    render :attendance, status: :ok
 rescue ActiveRecord::RecordNotFound => e
     render json: {
       error: e.to_s
