@@ -9,7 +9,7 @@ json.array! @host_events do |event|
   json.date event.date
   json.image event.image
   json.category event.category
-  json.attending event.going
+  json.attending event.going.length()
   json.location do
     json.longitude event.longitude
     json.latitude event.latitude
