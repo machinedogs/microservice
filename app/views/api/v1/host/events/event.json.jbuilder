@@ -13,7 +13,7 @@ json.event do
   json.location do
     json.longitude @event.longitude
     json.latitude @event.latitude
-    json.address event.address
+    json.address @event.address
   end
   json.host do
     json.profile @event.host.profileImage
