@@ -7,6 +7,7 @@ class Api::V1::EventsController < ApplicationController
   def index
     #check params 
     @events = Event.all
+    user_location = ['latitude': params[:latitude], 'longitude': params[:longitude]]
     #if date and location given present
     if(params[:date] && params[:latitude] && params[:longitude] )
       #Get all events for that day
