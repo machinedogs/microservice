@@ -11,7 +11,11 @@ class Api::V1::EventsController < ApplicationController
     if(params[:date] && params[:latitude] && params[:longitude] )
       #Get all events for that day
       @events = @events.select do |event|
-        DateTime.parse(event.date).to_date == DateTime.parse(params[:date]).to_date
+        begin
+          DateTime.parse(event.date).to_date == DateTime.parse(params[:date]).to_date
+       rescue ArgumentError
+          false
+       end
       end
       #Filter for the nearest events now
       @events = @events.select do |event|
@@ -22,11 +26,19 @@ class Api::V1::EventsController < ApplicationController
     elsif (params[:latitude] && params[:longitude])
       #Get all events for that day
       @events = @events.select do |event|
-        DateTime.parse(event.date).to_date == DateTime.parse(params[:date]).to_date
+        begin
+          DateTime.parse(event.date).to_date == DateTime.parse(params[:date]).to_date
+       rescue ArgumentError
+          false
+       end
       end
       #Filter all the events that are old, meaning time right now is more
       @events = @events.select do |event|
-        DateTime.parse(event.date) > Time.now.iso8601
+        begin
+          DateTime.parse(event.date) > Time.now.iso8601
+        rescue ArgumentError
+          false
+        end
       end
       #Filter for the nearest events now
       @events = @events.select do |event|
