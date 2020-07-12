@@ -36,6 +36,8 @@ class Api::V1::EventsController < ApplicationController
     elsif (params[:date])
       #Get all events for that day
       @events = @events.select do |event|
+        puts event.date
+        puts params[:date]
         DateTime.parse(event.date).to_date == DateTime.parse(params[:date].to_s).to_date
       end
       render :events, status: :ok
