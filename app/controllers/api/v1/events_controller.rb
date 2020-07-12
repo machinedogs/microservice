@@ -33,6 +33,12 @@ class Api::V1::EventsController < ApplicationController
         Geocoder::Calculations.distance_between([user_location[:latitude], user_location[:longitude]], [event.latitude, event.longitude])< 200
       end
       render :events, status: :ok
+    elsif (params[:date])
+      #Get all events for that day
+      @events = @events.select do |event|
+        DateTime.parse(event.date).to_date == DateTime.parse(params[:date]).to_date
+      end
+      render :events, status: :ok
       #Render all events for the future
     else 
       #Filter all the events that are old, meaning time right now is more
