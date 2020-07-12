@@ -36,9 +36,9 @@ class Api::V1::EventsController < ApplicationController
       #Render all events for the future
     else 
       #Filter all the events that are old, meaning time right now is more
-      @events = @events.select do |event|
-        DateTime.parse(event.date) > Time.now.iso8601
-      end
+      # @events = @events.select do |event|
+      #   DateTime.parse(event.date) > Time.now.iso8601
+      # end
       render :events, status: :ok
     end
   end
