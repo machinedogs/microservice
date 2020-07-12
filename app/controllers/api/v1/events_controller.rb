@@ -39,7 +39,7 @@ class Api::V1::EventsController < ApplicationController
         puts "date Here"
         puts event.date
         puts params[:date]
-        DateTime.parse(event.date.to_s).to_date == DateTime.parse(params[:date].to_s).to_date
+        DateTime.parse(event.date.to_s).to_date == DateTime.parse(params[:date]).to_date
       end
       render :events, status: :ok
       #Render all events for the future
