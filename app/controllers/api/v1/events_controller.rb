@@ -13,8 +13,7 @@ class Api::V1::EventsController < ApplicationController
       #Get all events for that day that still need to happen
       @events = @events.select do |event|
         begin
-          DateTime.parse(event.date).to_date == DateTime.parse(params[:date]).to_date
-          && DateTime.parse(event.date) > DateTime.parse(params[:date])
+          DateTime.parse(event.date).to_date == DateTime.parse(params[:date]).to_date && DateTime.parse(event.date) > DateTime.parse(params[:date])
        rescue ArgumentError
           false
        end
@@ -29,12 +28,10 @@ class Api::V1::EventsController < ApplicationController
       #Get all events for that day
       @events = @events.select do |event|
         begin
-          DateTime.parse(event.date).to_date == Time.now.iso8601.to_date
-          && DateTime.parse(event.date) > Time.now.iso8601
+          DateTime.parse(event.date).to_date == Time.now.iso8601.to_date && DateTime.parse(event.date) > Time.now.iso8601
        rescue ArgumentError
           false
        end
-      end
       end
       #Filter for the nearest events now
       @events = @events.select do |event|
@@ -46,8 +43,7 @@ class Api::V1::EventsController < ApplicationController
       #Get all events for that day
       @events = @events.select do |event|
         begin
-          DateTime.parse(event.date).to_date == DateTime.parse(params[:date]).to_date
-          && DateTime.parse(event.date) > DateTime.parse(params[:date])
+          DateTime.parse(event.date).to_date == DateTime.parse(params[:date]).to_date && DateTime.parse(event.date) > DateTime.parse(params[:date])
        rescue ArgumentError
           false
        end
