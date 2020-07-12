@@ -8,17 +8,17 @@ class Api::V1::AttendingController < ApplicationController
     # Get user
     user = AuthorizeApiRequest.call(params).result
     #Find the event that they are try to mark as attending
-    event = Event.find(params[:event_id])
+    @event = Event.find(params[:event_id])
     #See if event exists and does not belong to this host and user is not already going to it
-    if (event && !user.event.exists?(params[:event_id]) && !event.going.include?(user.id.to_s))
+    if (@event && !user.event.exists?(params[:event_id]) && !@event.going.include?(user.id.to_s))
         #Save the person as going to the event 
-        if event.going == nil
-            event.update!(going: [ user.id ] )
-            render json: { status: 'success', data: event }, status: :ok
-        elsif event.update!(going: event.going.push(user.id ))
-            render json: { status: 'success', data: event }, status: :ok
+        if @event.going == nil
+          @event.update!(going: [ user.id ] )
+          render :attendance_event, status: :ok
+        elsif @event.update!(going: @event.going.push(user.id ))
+          render :attendance_event, status: :ok
         else
-            render json: { status: 'error' }, status: :unprocessable_entity
+          render json: { status: 'error' }, status: :unprocessable_entity
         end
     else
       render json: { status: 'error' }, status: :unprocessable_entity
@@ -34,11 +34,11 @@ class Api::V1::AttendingController < ApplicationController
   def destroy
     # Get user
     user = AuthorizeApiRequest.call(params).result
-    event = Event.find(params[:event_id])
+    @event = Event.find(params[:event_id])
     #See if event is saved event for that user, if so remove it 
-    if (event.going.include?(user.id.to_s) )
-      event.update!(going: event.going-[user.id.to_s])
-      render json: { status: 'success', data: event }, status: :ok
+    if (@event.going.include?(user.id.to_s) )
+      @event.update!(going: @event.going-[user.id.to_s])
+      render :attendance_event, status: :ok
     else
       render json: {
         error: e.to_s
