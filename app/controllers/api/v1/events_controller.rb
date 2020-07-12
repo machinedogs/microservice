@@ -7,14 +7,40 @@ class Api::V1::EventsController < ApplicationController
   def index
     #check params 
     @events = Event.all
-    if(params[:latitude] && params[:longitude])
-      user_location = {latitude: params[:latitude], longitude: params[:longitude]}
-      #Initially, we want to send events closest to them 
+    #if date and location given present
+    if(params[:date] && params[:latitude] && params[:longitude] )
+      #Get all events for that day
       @events = @events.select do |event|
-      Geocoder::Calculations.distance_between([user_location[:latitude], user_location[:longitude]], [event.latitude, event.longitude])< 200
+        DateTime.parse(event.date).to_date == DateTime.parse(params[:date]).to_date
       end
+      #Filter for the nearest events now
+      @events = @events.select do |event|
+        Geocoder::Calculations.distance_between([user_location[:latitude], user_location[:longitude]], [event.latitude, event.longitude])< 200
+      end
+      render :events, status: :ok
+      #Given just location, filter events for that day
+    elsif (params[:latitude] && params[:longitude])
+      #Get all events for that day
+      @events = @events.select do |event|
+        DateTime.parse(event.date).to_date == DateTime.parse(params[:date]).to_date
+      end
+      #Filter all the events that are old, meaning time right now is more
+      @events = @events.select do |event|
+        DateTime.parse(event.date) > Time.now.iso8601
+      end
+      #Filter for the nearest events now
+      @events = @events.select do |event|
+        Geocoder::Calculations.distance_between([user_location[:latitude], user_location[:longitude]], [event.latitude, event.longitude])< 200
+      end
+      render :events, status: :ok
+      #Render all events for the future
+    else 
+      #Filter all the events that are old, meaning time right now is more
+      @events = @events.select do |event|
+        DateTime.parse(event.date) > Time.now.iso8601
+      end
+      render :events, status: :ok
     end
-    render :events, status: :ok
   end
 
   private
