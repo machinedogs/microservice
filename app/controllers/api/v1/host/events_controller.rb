@@ -139,10 +139,9 @@ class Api::V1::Host::EventsController < ApplicationController
       :image,
       :category,
       :latitude,
-      :longitude
+      :longitude,
+      :address
     )
-    param[:address]= Geocoder.search(params[:latitude].to_s + ',' + params[:longitude].to_s)&.first&.address
-    return param
   end
 
   def parse_string(string)

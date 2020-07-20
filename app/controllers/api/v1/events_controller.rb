@@ -69,7 +69,8 @@ class Api::V1::EventsController < ApplicationController
       :image,
       :category,
       :latitude,
-      :longitude
+      :longitude,
+      :address
     )
   end
 end
