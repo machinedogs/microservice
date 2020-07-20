@@ -1,3 +1,4 @@
+
 class Api::V1::Host::EventsController < ApplicationController
     include JsonWebToken
 
@@ -116,10 +117,22 @@ class Api::V1::Host::EventsController < ApplicationController
     end
   end
 
+  def attending
+    #Get user
+    user = AuthorizeApiRequest.call(params).result
+    #Get all the events
+    @events = Event.all
+    #Filter based on the events that this user is attending
+    @events = @events.select do |event|
+      event.going.include?(user.id.to_s)
+    end
+    render :attending_events, status: :ok
+  end
+
   private
 
   def event_params
-    params.permit(
+    param = params.permit(
       :title,
       :description,
       :date,
@@ -128,6 +141,8 @@ class Api::V1::Host::EventsController < ApplicationController
       :latitude,
       :longitude
     )
+    param[:address]= Geocoder.search(params[:latitude].to_s + ',' + params[:longitude].to_s)&.first&.address
+    return param
   end
 
   def parse_string(string)

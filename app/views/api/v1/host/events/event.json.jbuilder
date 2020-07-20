@@ -9,10 +9,11 @@ json.event do
   json.date @event.date
   json.image @event.image
   json.category @event.category
+  json.attending @event.going.length()
   json.location do
     json.longitude @event.longitude
     json.latitude @event.latitude
-    json.address Geocoder.search('' + @event.latitude + ',' + @event.longitude)&.first&.address
+    json.address @event.address
   end
   json.host do
     json.profile @event.host.profileImage

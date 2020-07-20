@@ -18,13 +18,13 @@
 # Create a host
 host_object = {
   "name": 'John Smith',
-  "email": 'fakeemail@gmail.com',
+  "email": 'faemail@gmail.com',
   "password": 'fakepassword',
   "password_confirmation": 'fakepassword'
 }
 host_object2 = {
   "name": 'John Lu',
-  "email": 'fakeemail2@gmail.com',
+  "email": 'feemail2@gmail.com',
   "password": 'fakepassword',
   "password_confirmation": 'fakepassword'
 }
@@ -54,6 +54,8 @@ event_object2 = {
 }
 
 # Associates the host to this event
-host.event.create!(event_object)
+(0...50).each do |i|  
+  host.event.create!(event_object)
+end
 
 host2.event.create!(event_object2)
