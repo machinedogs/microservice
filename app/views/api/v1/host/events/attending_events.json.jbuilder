@@ -2,7 +2,7 @@
 
 json.array! @events do |event|
     next if event&.host.nil?
-    json.event event.id
+    json.id event.id
     json.title event.title
     json.description event.description
     json.date event.date
